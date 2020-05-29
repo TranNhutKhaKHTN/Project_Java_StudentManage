@@ -5,6 +5,11 @@
  */
 package qlsv;
 
+import dao.QLSVDao;
+import java.awt.List;
+import java.util.*;
+import pojo.Tkdangnhap;
+
 /**
  *
  * @author HP
@@ -16,6 +21,13 @@ public class QLSV {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        ArrayList<Tkdangnhap> tk = new ArrayList<>();
+        tk = (ArrayList<Tkdangnhap>) QLSVDao.layDanhSachTKDangNhap();
+        for(int i=0;i<tk.size();i++)
+        {
+            System.out.println(tk.get(i).getMssv());
+            System.out.println(tk.get(i).getPassword());
+        }
     }
     
 }

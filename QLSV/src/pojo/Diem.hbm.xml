@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 29, 2020 9:07:43 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.Diem" table="diem" catalog="qlsv" optimistic-lock="version">
+        <id name="stt" type="int">
+            <column name="stt" />
+            <generator class="assigned" />
+        </id>
+        <property name="maSv" type="string">
+            <column name="maSV" length="45" />
+        </property>
+        <property name="maMon" type="string">
+            <column name="maMon" length="45" />
+        </property>
+        <property name="diemGk" type="java.lang.Float">
+            <column name="diemGK" precision="12" scale="0" />
+        </property>
+        <property name="diemCk" type="java.lang.Float">
+            <column name="diemCK" precision="12" scale="0" />
+        </property>
+        <property name="diemKhac" type="java.lang.Float">
+            <column name="diemKhac" precision="12" scale="0" />
+        </property>
+        <property name="tongDiem" type="java.lang.Float">
+            <column name="tongDiem" precision="12" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>
