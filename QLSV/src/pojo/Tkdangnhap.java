@@ -1,5 +1,5 @@
 package pojo;
-// Generated May 29, 2020 9:07:42 PM by Hibernate Tools 4.3.1
+// Generated May 29, 2020 11:00:17 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,7 +9,7 @@ package pojo;
 public class Tkdangnhap  implements java.io.Serializable {
 
 
-     private int mssv;
+     private String mssv;
      private String password;
      private Integer isGv;
 
@@ -17,20 +17,20 @@ public class Tkdangnhap  implements java.io.Serializable {
     }
 
 	
-    public Tkdangnhap(int mssv) {
+    public Tkdangnhap(String mssv) {
         this.mssv = mssv;
     }
-    public Tkdangnhap(int mssv, String password, Integer isGv) {
+    public Tkdangnhap(String mssv, String password, Integer isGv) {
        this.mssv = mssv;
        this.password = password;
        this.isGv = isGv;
     }
    
-    public int getMssv() {
+    public String getMssv() {
         return this.mssv;
     }
     
-    public void setMssv(int mssv) {
+    public void setMssv(String mssv) {
         this.mssv = mssv;
     }
     public String getPassword() {

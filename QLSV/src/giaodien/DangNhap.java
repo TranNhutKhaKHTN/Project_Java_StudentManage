@@ -5,7 +5,10 @@
  */
 package giaodien;
 
+import dao.QLSVDao;
+import java.util.List;
 import javax.swing.JOptionPane;
+import pojo.Tkdangnhap;
 
 /**
  *
@@ -13,6 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class DangNhap extends javax.swing.JFrame {
 
+    public static String MSSV;
     /**
      * Creates new form DangNhap
      */
@@ -113,11 +117,40 @@ public class DangNhap extends javax.swing.JFrame {
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         // TODO add your handling code here:
+        List<Tkdangnhap> tks = null;
+        tks = QLSVDao.layDanhSachTKDangNhap();
+        String Username = edtUserName.getText();
+        String PassWord = edtPassWord.getText();
+        int mark = -1;
         
-        ManagerMenu jp1 = new ManagerMenu();
-        dn.setVisible(false);
-        jp1.setVisible(true);
-        
+        for(int i=0;i<tks.size();i++)
+        {
+            if(Username.equals(tks.get(i).getMssv()))
+            {
+                mark = i;
+                break;
+            }
+        }
+        if(mark ==-1)
+        {
+            JOptionPane.showMessageDialog(rootPane,"sai username hoặc mật khẩu");
+        }
+        MSSV = tks.get(mark).getMssv();
+        if(PassWord.equals(tks.get(mark).getPassword()))
+        {
+            if(tks.get(mark).getIsGv()==1)
+            {
+                ManagerMenu jp1 = new ManagerMenu();
+                dn.setVisible(false);
+                jp1.setVisible(true);
+            }
+            else
+            {
+                StudentMenu stdmn= new StudentMenu();
+                dn.setVisible(false);
+                stdmn.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void btnDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMKActionPerformed
