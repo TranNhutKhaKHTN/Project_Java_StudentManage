@@ -23,8 +23,8 @@ public class Lop  implements java.io.Serializable {
     public Lop(int stt) {
         this.stt = stt;
     }
-    public Lop(int stt, String mssv, String hoTen, String gioiTinh, String lop, String cmnd) {
-       this.stt = stt;
+    public Lop( String mssv, String hoTen, String gioiTinh, String lop, String cmnd) {
+       //this.stt = stt;
        this.mssv = mssv;
        this.hoTen = hoTen;
        this.gioiTinh = gioiTinh;

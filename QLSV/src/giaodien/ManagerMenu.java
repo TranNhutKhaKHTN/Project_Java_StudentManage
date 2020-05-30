@@ -5,17 +5,40 @@
  */
 package giaodien;
 
+import dao.QLSVDao;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
+import pojo.Lop;
+import pojo.Tkdangnhap;
+
 /**
  *
  * @author HP
  */
 public class ManagerMenu extends javax.swing.JFrame {
 
+    private DefaultTableModel dftm;
+    private ArrayList<Lop> listLop;
     /**
      * Creates new form NewJFrame
      */
+    private void myinit()
+    {
+        dftm = (DefaultTableModel) tblop.getModel();
+        listLop = new ArrayList<Lop>();
+    }
     public ManagerMenu() {
         initComponents();
+        myinit();
     }
 
     /**
@@ -36,8 +59,10 @@ public class ManagerMenu extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnChonFile = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        lbfile = new javax.swing.JLabel();
         btnThemDSLop = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblop = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -121,11 +146,46 @@ public class ManagerMenu extends javax.swing.JFrame {
         jTabbedPane1.addTab("Xem thời khóa biểu", jPanel4);
 
         btnChonFile.setText("Chọn file csv");
+        btnChonFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonFileActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setText("file csv");
-        jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbfile.setText("file csv");
+        lbfile.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnThemDSLop.setText("Thêm vào hệ thống");
+        btnThemDSLop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemDSLopActionPerformed(evt);
+            }
+        });
+
+        tblop.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STT", "MSSV", "Ho Ten", "Gioi Tinh", "Lop", "CMND"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblop);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,12 +193,15 @@ public class ManagerMenu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnThemDSLop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnChonFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(191, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbfile, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnChonFile, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnThemDSLop)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,10 +209,11 @@ public class ManagerMenu extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnChonFile)
-                    .addComponent(jLabel2))
-                .addGap(41, 41, 41)
-                .addComponent(btnThemDSLop)
-                .addContainerGap(140, Short.MAX_VALUE))
+                    .addComponent(lbfile)
+                    .addComponent(btnThemDSLop))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thêm danh sách lớp", jPanel1);
@@ -182,6 +246,63 @@ public class ManagerMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_Closing
+
+    private void btnChonFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonFileActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chf = new JFileChooser();
+        int check = chf.showOpenDialog(null);
+        if(check==JFileChooser.APPROVE_OPTION)
+        {
+            listLop.clear();
+            String fileName = chf.getSelectedFile().getPath();
+            lbfile.setText(fileName);
+            BufferedReader reader;
+            String Line;
+            try {
+                reader = new BufferedReader(new FileReader(fileName));
+                Line = reader.readLine();
+                int dem=0;
+                while((Line = reader.readLine())!=null)
+                {
+                    //Line = reader.readLine();
+                    List a = pastCSVLine(Line);
+                    
+                    Lop lop = new Lop((String)a.get(1),(String)a.get(2),(String)a.get(3),(String)a.get(4),(String)a.get(5));
+                    
+                    //lop.setStt(Integer.parseInt((String) a.get(0)));
+//                    lop.setMssv((String) a.get(1));
+//                    lop.setHoTen((String) a.get(2));
+//                    lop.setGioiTinh((String) a.get(3));
+//                    lop.setLop((String) a.get(4));
+//                    lop.setCmnd((String) a.get(5));
+                    listLop.add(lop);
+                    
+                    dftm.addRow(new Object[]{dem++,
+                        lop.getMssv(),
+                        lop.getHoTen(),
+                        lop.getGioiTinh(),
+                        lop.getLop(),
+                        lop.getCmnd() });
+                }
+                
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnChonFileActionPerformed
+
+    private void btnThemDSLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDSLopActionPerformed
+        // TODO add your handling code here:
+        for(int i=0;i<listLop.size();i++)
+        {
+            QLSVDao.themDanhSachLop(listLop.get(i));
+            String ms = listLop.get(i).getMssv();
+            Tkdangnhap tk = new Tkdangnhap(ms,ms,0);
+            QLSVDao.themTaiKhoanDN(tk);
+        }
+    }//GEN-LAST:event_btnThemDSLopActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,18 +339,33 @@ public class ManagerMenu extends javax.swing.JFrame {
             }
         });
     }
+    
+    public static List<String> pastCSVLine(String csvLine)
+    {
+        List<String> result = new ArrayList<String>();
+	if (csvLine != null) {
+            String[] splitData = csvLine.split(",");
+            for (int i = 0; i < splitData.length; i++)
+            {
+               result.add(splitData[i]);
+            }
+        }
+	return result;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChonFile;
     private javax.swing.JButton btnThemDSLop;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lbfile;
+    private javax.swing.JTable tblop;
     // End of variables declaration//GEN-END:variables
 }
