@@ -16,6 +16,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pojo.Lop;
 import pojo.Tkdangnhap;
@@ -28,13 +29,17 @@ public class ManagerMenu extends javax.swing.JFrame {
 
     private DefaultTableModel dftm;
     private ArrayList<Lop> listLop;
+    private DefaultTableModel dfmDsLop;
+    private ArrayList<Lop> DSLop;
     /**
      * Creates new form NewJFrame
      */
     private void myinit()
     {
         dftm = (DefaultTableModel) tblop.getModel();
+        dfmDsLop=(DefaultTableModel) tbDSLop.getModel();
         listLop = new ArrayList<Lop>();
+        DSLop = new ArrayList<Lop>();
     }
     public ManagerMenu() {
         initComponents();
@@ -52,10 +57,26 @@ public class ManagerMenu extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        edtMSSV = new javax.swing.JTextField();
+        edtHoTen = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        edtGioiTinh = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        edtLop = new javax.swing.JTextField();
+        edtCMND = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        btnThemSinhVien = new javax.swing.JButton();
+        lbError = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        edtTenLop = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbDSLop = new javax.swing.JTable();
+        btnXemThongTinLop = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnChonFile = new javax.swing.JButton();
@@ -66,32 +87,99 @@ public class ManagerMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                Close(evt);
-            }
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                Closing(evt);
+
+        jLabel2.setText("MSSV");
+
+        jLabel3.setText("Ho Tên");
+
+        jLabel4.setText("Giới tính");
+
+        jLabel5.setText("Lớp");
+
+        edtLop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtLopActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("jLabel1");
+        jLabel6.setText("CMND");
+
+        btnThemSinhVien.setText("Thêm sinh viên");
+        btnThemSinhVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemSinhVienActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(404, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(197, 197, 197))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(edtMSSV)
+                                    .addComponent(edtHoTen)
+                                    .addComponent(edtGioiTinh, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)))
+                            .addComponent(jLabel3))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(86, 86, 86)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(edtCMND, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(edtLop, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnThemSinhVien)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(73, 73, 73)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(lbError, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(172, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addComponent(jLabel1)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edtMSSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(edtGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(btnThemSinhVien)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(lbError, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Thêm sinh viên", jPanel2);
@@ -119,15 +207,70 @@ public class ManagerMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("thêm thời khóa biểu", jLayeredPane1);
 
+        jLabel1.setText("Nhập lớp cần xem");
+
+        tbDSLop.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STT", "MSSV", "Ho Ten", "GioiTinh", "Lop", "CMND"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tbDSLop);
+
+        btnXemThongTinLop.setText("Xem thông tin");
+        btnXemThongTinLop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXemThongTinLopActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 635, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(edtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(104, 104, 104)
+                        .addComponent(btnXemThongTinLop)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 263, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXemThongTinLop))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Xem danh sách lớp", jPanel3);
@@ -237,16 +380,6 @@ public class ManagerMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Close(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_Close
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_Close
-
-    private void Closing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_Closing
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_Closing
-
     private void btnChonFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonFileActionPerformed
         // TODO add your handling code here:
         JFileChooser chf = new JFileChooser();
@@ -261,20 +394,14 @@ public class ManagerMenu extends javax.swing.JFrame {
             try {
                 reader = new BufferedReader(new FileReader(fileName));
                 Line = reader.readLine();
-                int dem=0;
+                int dem=1;
+                dftm.setRowCount(0);
                 while((Line = reader.readLine())!=null)
                 {
                     //Line = reader.readLine();
                     List a = pastCSVLine(Line);
                     
                     Lop lop = new Lop((String)a.get(1),(String)a.get(2),(String)a.get(3),(String)a.get(4),(String)a.get(5));
-                    
-                    //lop.setStt(Integer.parseInt((String) a.get(0)));
-//                    lop.setMssv((String) a.get(1));
-//                    lop.setHoTen((String) a.get(2));
-//                    lop.setGioiTinh((String) a.get(3));
-//                    lop.setLop((String) a.get(4));
-//                    lop.setCmnd((String) a.get(5));
                     listLop.add(lop);
                     
                     dftm.addRow(new Object[]{dem++,
@@ -303,6 +430,66 @@ public class ManagerMenu extends javax.swing.JFrame {
             QLSVDao.themTaiKhoanDN(tk);
         }
     }//GEN-LAST:event_btnThemDSLopActionPerformed
+
+    private void edtLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtLopActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtLopActionPerformed
+
+    private void btnThemSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSinhVienActionPerformed
+        // TODO add your handling code here:
+        String MSSV = edtMSSV.getText();
+        String HoTen = edtHoTen.getText();
+        String GioiTinh=edtGioiTinh.getText();
+        String Lop = edtLop.getText();
+        String CMND = edtCMND.getText();
+        String error="Điền đầy đủ thông tin";
+        if(MSSV.equals("")||HoTen.equals("")||GioiTinh.equals("")||Lop.equals("")||CMND.equals(""))
+        {
+            lbError.setText(error);
+        }
+        else
+        {
+            Lop lp = new Lop(MSSV,HoTen,GioiTinh,Lop,CMND);
+            QLSVDao.themDanhSachLop(lp);
+            Tkdangnhap tk = new Tkdangnhap(MSSV,MSSV,0);
+            QLSVDao.themTaiKhoanDN(tk);
+            lbError.setText("");
+            JOptionPane.showMessageDialog(rootPane, "Thêm sinh viên thành công");
+        }
+    }//GEN-LAST:event_btnThemSinhVienActionPerformed
+
+    private void btnXemThongTinLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemThongTinLopActionPerformed
+        // TODO add your handling code here:
+        String TenLop = edtTenLop.getText();
+        if(TenLop.equals(""))
+        {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên lớp");
+        }
+        else
+        {
+//            int rows = dfmDsLop.getRowCount();
+//            for(int i=0;i<rows;i++)
+//            {
+//                dfmDsLop.removeRow(i);
+//            }
+            dfmDsLop.setRowCount(0);
+            if(!DSLop.isEmpty())
+                DSLop.clear();
+            DSLop = (ArrayList<Lop>) QLSVDao.layDanhSachLop(TenLop);
+            if(DSLop.isEmpty())
+            {
+                JOptionPane.showMessageDialog(rootPane, "Không có lớp cần tìm");
+            }
+            else
+            {
+                for (int i = 0; i < DSLop.size(); i++) 
+                {
+                dfmDsLop.addRow(new Object[]{i + 1, DSLop.get(i).getMssv(), DSLop.get(i).getHoTen(),
+                    DSLop.get(i).getGioiTinh(), DSLop.get(i).getLop(), DSLop.get(i).getCmnd()});
+                }
+            }
+        }
+    }//GEN-LAST:event_btnXemThongTinLopActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,16 +543,32 @@ public class ManagerMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChonFile;
     private javax.swing.JButton btnThemDSLop;
+    private javax.swing.JButton btnThemSinhVien;
+    private javax.swing.JButton btnXemThongTinLop;
+    private javax.swing.JTextField edtCMND;
+    private javax.swing.JTextField edtGioiTinh;
+    private javax.swing.JTextField edtHoTen;
+    private javax.swing.JTextField edtLop;
+    private javax.swing.JTextField edtMSSV;
+    private javax.swing.JTextField edtTenLop;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lbError;
     private javax.swing.JLabel lbfile;
+    private javax.swing.JTable tbDSLop;
     private javax.swing.JTable tblop;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,6 +11,7 @@ import net.sf.ehcache.hibernate.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import pojo.Lop;
 import pojo.Tkdangnhap;
@@ -89,5 +90,53 @@ public class QLSVDao {
             session.close();
         }
         //return kq;
+    }
+    
+//    public static ArrayList<Lop> layDanhSachLop(String tenLop)
+//    {
+//        SessionFactory factory = NewHibernateUtil.getSessionFactory();
+//        Session session = factory.getCurrentSession();
+//        Transaction transaction = null;
+//        ArrayList<Lop> ds = null;
+//        try {
+//            session.getTransaction().begin();
+//            String hql = "from Lop Lp where Lb=:tenlop";
+//            Query query = session.createQuery(hql);
+//            query.setParameter("tenlop", tenLop);
+//            ds=(ArrayList<Lop>) query.list();
+//        } catch (HibernateException ex) {
+//            //Log the exception
+//            System.err.println(ex);
+//            session.getTransaction().rollback();
+//        } finally {
+//            session.close();
+//        }
+//        return ds;
+//    }
+    
+    public static ArrayList<Lop> layDanhSachLop(String tenLop) {
+        ArrayList<Lop> ds = null;
+        ArrayList<Lop> dsLop= new ArrayList<>();
+        Session session;
+        session = NewHibernateUtil.getSessionFactory()
+                .openSession();
+        try {
+            String hql = "select sv from Lop sv";
+            Query query = session.createQuery(hql);
+            ds = (ArrayList<Lop>) query.list();
+            for(int i=0;i<ds.size();i++)
+            {
+                if(ds.get(i).getLop().equals(tenLop))
+                {
+                    dsLop.add(ds.get(i));
+                }
+            }
+        } catch (HibernateException ex) {
+//Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return dsLop;
     }
 }
