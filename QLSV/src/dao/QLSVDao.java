@@ -28,6 +28,22 @@ public class QLSVDao {
      *
      * @return
      */
+    public static Tkdangnhap laySinhVien(String maSV) {
+        Tkdangnhap tk = null;
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            tk = (Tkdangnhap) session.get(Tkdangnhap.class,
+                    maSV);
+        } catch (HibernateException ex) {
+//Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return tk;
+    }
+    
+    
     public static java.util.List<Tkdangnhap> layDanhSachTKDangNhap() {
         java.util.List<Tkdangnhap> ds = null;
         Session session;
@@ -46,14 +62,14 @@ public class QLSVDao {
         return ds;
     }
 
-    public static boolean themDanhSachLop(Lop lop) {
+    public static void themDanhSachLop(Lop lop) {
         Session session;
         session = NewHibernateUtil.getSessionFactory()
                 .openSession();
-//        if (QLSVDAO.layThongTinSach(sach.getMaSach()) != null) {
-//            return false;
-//        }
-        boolean kq = true;
+        if (QLSVDao.laySinhVien(lop.getMssv()) != null) {
+            return;
+        }
+        //boolean kq = true;
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
@@ -62,11 +78,11 @@ public class QLSVDao {
         } catch (HibernateException ex) {
             transaction.rollback();
             System.err.println(ex);
-            kq = false;
+            //kq = false;
         } finally {
             session.close();
         }
-        return kq;
+        
     }
 
     public static void themTaiKhoanDN(Tkdangnhap tk)
@@ -74,9 +90,9 @@ public class QLSVDao {
         Session session;
         session = NewHibernateUtil.getSessionFactory()
                 .openSession();
-//        if (QLSVDAO.layThongTinSach(sach.getMaSach()) != null) {
-//            return false;
-//        }
+        if (QLSVDao.laySinhVien(tk.getMssv()) != null) {
+            return;
+        }
         //boolean kq = true;
         Transaction transaction = null;
         try {
@@ -142,5 +158,31 @@ public class QLSVDao {
             session.close();
         }
         //return kq;
+    }
+    
+    public static ArrayList<Diem> layDSDiem(String tenLop)
+    {
+        ArrayList<Diem> ds = null;
+        ArrayList<Diem> dsDiem= new ArrayList<>();
+        Session session;
+        session = NewHibernateUtil.getSessionFactory()
+                .openSession();
+        try {
+            String hql = "select diem from Diem diem";
+            Query query = session.createQuery(hql);
+            ds = (ArrayList<Diem>) query.list();
+            for(int i=0;i<ds.size();i++)
+            {               
+                if(ds.get(i).getLop().equals(tenLop))
+                {
+                    dsDiem.add(ds.get(i));
+                }
+            }
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return dsDiem;
     }
 }

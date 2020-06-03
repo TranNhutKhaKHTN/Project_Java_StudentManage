@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jun 3, 2020 1:51:08 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jun 3, 2020 2:23:50 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.Diem" table="diem" catalog="qlsv" optimistic-lock="version">
         <id name="stt" type="java.lang.Integer">
@@ -13,6 +13,9 @@
         </property>
         <property name="maMon" type="string">
             <column name="maMon" length="45" />
+        </property>
+        <property name="lop" type="string">
+            <column name="Lop" length="45" />
         </property>
         <property name="diemGk" type="java.lang.Float">
             <column name="diemGK" precision="12" scale="0" />
