@@ -1,5 +1,5 @@
 package pojo;
-// Generated May 29, 2020 11:00:17 PM by Hibernate Tools 4.3.1
+// Generated Jun 3, 2020 1:51:07 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,7 +9,7 @@ package pojo;
 public class Lop  implements java.io.Serializable {
 
 
-     private int stt;
+     private Integer stt;
      private String mssv;
      private String hoTen;
      private String gioiTinh;
@@ -19,12 +19,7 @@ public class Lop  implements java.io.Serializable {
     public Lop() {
     }
 
-	
-    public Lop(int stt) {
-        this.stt = stt;
-    }
-    public Lop( String mssv, String hoTen, String gioiTinh, String lop, String cmnd) {
-       //this.stt = stt;
+    public Lop(String mssv, String hoTen, String gioiTinh, String lop, String cmnd) {
        this.mssv = mssv;
        this.hoTen = hoTen;
        this.gioiTinh = gioiTinh;
@@ -32,11 +27,11 @@ public class Lop  implements java.io.Serializable {
        this.cmnd = cmnd;
     }
    
-    public int getStt() {
+    public Integer getStt() {
         return this.stt;
     }
     
-    public void setStt(int stt) {
+    public void setStt(Integer stt) {
         this.stt = stt;
     }
     public String getMssv() {

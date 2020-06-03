@@ -155,7 +155,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(lbError, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +188,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(btnThemSinhVien)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(lbError, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -204,7 +204,7 @@ public class ManagerMenu extends javax.swing.JFrame {
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap(317, Short.MAX_VALUE)
+                .addContainerGap(360, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(245, 245, 245))
         );
@@ -213,7 +213,7 @@ public class ManagerMenu extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGap(113, 113, 113)
                 .addComponent(jButton2)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("thêm thời khóa biểu", jLayeredPane1);
@@ -268,7 +268,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                         .addComponent(edtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(104, 104, 104)
                         .addComponent(btnXemThongTinLop)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,7 +280,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                     .addComponent(edtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXemThongTinLop))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -290,11 +290,11 @@ public class ManagerMenu extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 635, Short.MAX_VALUE)
+            .addGap(0, 678, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 263, Short.MAX_VALUE)
+            .addGap(0, 247, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Xem thời khóa biểu", jPanel4);
@@ -355,7 +355,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                         .addComponent(btnChonFile, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnThemDSLop)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,7 +367,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                     .addComponent(btnThemDSLop))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thêm danh sách lớp", jPanel1);
@@ -426,7 +426,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                 .addComponent(btnThemDiemVaoHT)
                 .addGap(133, 133, 133))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(66, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -440,7 +440,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                     .addComponent(lbFileDiem))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thêm điểm", jPanel5);
@@ -450,15 +450,15 @@ public class ManagerMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 55, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addContainerGap(115, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
 
         pack();
@@ -593,7 +593,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                 dftm.setRowCount(0);
                 while((Line = reader.readLine())!=null)
                 {
-                    JOptionPane.showMessageDialog(rootPane,"--" + Line+"--");
+                    //JOptionPane.showMessageDialog(rootPane,"--" + Line+"--");
                     //Line = reader.readLine();
                     ArrayList a = (ArrayList) pastCSVLine(Line);
                     String masv = (String)a.get(1);
@@ -602,7 +602,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                     float diemCK=Float.parseFloat((String) a.get(4));
                     float diemKhac=Float.parseFloat((String) a.get(5));
                     float diemTong=Float.parseFloat((String) a.get(6));
-                    Diem diem = new Diem(masv,mon,diemGK,diemCK,diemKhac,diemTong);
+                    Diem diem = new Diem(masv,mon,diemGK,diemCK,diemKhac,diemTong,0);
                     DSDiem.add(diem);
                     
                     dfmDiem.addRow(new Object[]{dem++,
