@@ -13,6 +13,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import pojo.Diem;
 import pojo.Lop;
 import pojo.Tkdangnhap;
 import util.NewHibernateUtil;
@@ -92,27 +93,6 @@ public class QLSVDao {
         //return kq;
     }
     
-//    public static ArrayList<Lop> layDanhSachLop(String tenLop)
-//    {
-//        SessionFactory factory = NewHibernateUtil.getSessionFactory();
-//        Session session = factory.getCurrentSession();
-//        Transaction transaction = null;
-//        ArrayList<Lop> ds = null;
-//        try {
-//            session.getTransaction().begin();
-//            String hql = "from Lop Lp where Lb=:tenlop";
-//            Query query = session.createQuery(hql);
-//            query.setParameter("tenlop", tenLop);
-//            ds=(ArrayList<Lop>) query.list();
-//        } catch (HibernateException ex) {
-//            //Log the exception
-//            System.err.println(ex);
-//            session.getTransaction().rollback();
-//        } finally {
-//            session.close();
-//        }
-//        return ds;
-//    }
     
     public static ArrayList<Lop> layDanhSachLop(String tenLop) {
         ArrayList<Lop> ds = null;
@@ -138,5 +118,29 @@ public class QLSVDao {
             session.close();
         }
         return dsLop;
+    }
+    
+    public static void themDiem(Diem d)
+    {
+        Session session;
+        session = NewHibernateUtil.getSessionFactory()
+                .openSession();
+//        if (QLSVDAO.layThongTinSach(sach.getMaSach()) != null) {
+//            return false;
+//        }
+        //boolean kq = true;
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(d);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            transaction.rollback();
+            System.err.println(ex);
+            //kq = false;
+        } finally {
+            session.close();
+        }
+        //return kq;
     }
 }

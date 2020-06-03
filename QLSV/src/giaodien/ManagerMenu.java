@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import pojo.Diem;
 import pojo.Lop;
 import pojo.Tkdangnhap;
 
@@ -31,6 +32,8 @@ public class ManagerMenu extends javax.swing.JFrame {
     private ArrayList<Lop> listLop;
     private DefaultTableModel dfmDsLop;
     private ArrayList<Lop> DSLop;
+    private DefaultTableModel dfmDiem;
+    private ArrayList<Diem> DSDiem;
     /**
      * Creates new form NewJFrame
      */
@@ -38,8 +41,10 @@ public class ManagerMenu extends javax.swing.JFrame {
     {
         dftm = (DefaultTableModel) tblop.getModel();
         dfmDsLop=(DefaultTableModel) tbDSLop.getModel();
+        dfmDiem = (DefaultTableModel) tbDiem.getModel();
         listLop = new ArrayList<Lop>();
         DSLop = new ArrayList<Lop>();
+        DSDiem = new ArrayList<Diem>();
     }
     public ManagerMenu() {
         initComponents();
@@ -84,6 +89,12 @@ public class ManagerMenu extends javax.swing.JFrame {
         btnThemDSLop = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblop = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        btnChonFileDiemCSV = new javax.swing.JButton();
+        btnThemDiemVaoHT = new javax.swing.JButton();
+        lbFileDiem = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbDiem = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -361,20 +372,93 @@ public class ManagerMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Thêm danh sách lớp", jPanel1);
 
+        btnChonFileDiemCSV.setText("Chọn file csv");
+        btnChonFileDiemCSV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonFileDiemCSVActionPerformed(evt);
+            }
+        });
+
+        btnThemDiemVaoHT.setText("Thêm vào hệ thống");
+        btnThemDiemVaoHT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemDiemVaoHTActionPerformed(evt);
+            }
+        });
+
+        lbFileDiem.setText("file csv");
+
+        tbDiem.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STT", "MSSV", "Môn", "Điểm GK", "Điểm CK", "Điểm khác", "Tổng điểm"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tbDiem);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(lbFileDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnChonFileDiemCSV)
+                .addGap(32, 32, 32)
+                .addComponent(btnThemDiemVaoHT)
+                .addGap(133, 133, 133))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnChonFileDiemCSV)
+                    .addComponent(btnThemDiemVaoHT)
+                    .addComponent(lbFileDiem))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Thêm điểm", jPanel5);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(66, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -491,6 +575,62 @@ public class ManagerMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnXemThongTinLopActionPerformed
 
+    private void btnChonFileDiemCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonFileDiemCSVActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chf = new JFileChooser();
+        int check = chf.showOpenDialog(null);
+        if(check==JFileChooser.APPROVE_OPTION)
+        {
+            
+            String fileName = chf.getSelectedFile().getPath();
+            lbFileDiem.setText(fileName);
+            BufferedReader reader;
+            String Line;
+            try {
+                reader = new BufferedReader(new FileReader(fileName));
+                reader.readLine();
+                int dem=1;
+                dftm.setRowCount(0);
+                while((Line = reader.readLine())!=null)
+                {
+                    JOptionPane.showMessageDialog(rootPane,"--" + Line+"--");
+                    //Line = reader.readLine();
+                    ArrayList a = (ArrayList) pastCSVLine(Line);
+                    String masv = (String)a.get(1);
+                    String mon = (String)a.get(2);
+                    float diemGK=Float.parseFloat((String) a.get(3));
+                    float diemCK=Float.parseFloat((String) a.get(4));
+                    float diemKhac=Float.parseFloat((String) a.get(5));
+                    float diemTong=Float.parseFloat((String) a.get(6));
+                    Diem diem = new Diem(masv,mon,diemGK,diemCK,diemKhac,diemTong);
+                    DSDiem.add(diem);
+                    
+                    dfmDiem.addRow(new Object[]{dem++,
+                        diem.getMaSv(),
+                        diem.getMaMon(),
+                        diem.getDiemGk(),
+                        diem.getDiemCk(),
+                        diem.getDiemKhac(),
+                        diem.getTongDiem()});
+                }
+                
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnChonFileDiemCSVActionPerformed
+
+    private void btnThemDiemVaoHTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDiemVaoHTActionPerformed
+        // TODO add your handling code here:
+        for(int i=0;i<DSDiem.size();i++)
+        {
+            QLSVDao.themDiem(DSDiem.get(i));
+        }
+        JOptionPane.showMessageDialog(rootPane, "thêm điểm vào hệ thống thành công");
+    }//GEN-LAST:event_btnThemDiemVaoHTActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -542,7 +682,9 @@ public class ManagerMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChonFile;
+    private javax.swing.JButton btnChonFileDiemCSV;
     private javax.swing.JButton btnThemDSLop;
+    private javax.swing.JButton btnThemDiemVaoHT;
     private javax.swing.JButton btnThemSinhVien;
     private javax.swing.JButton btnXemThongTinLop;
     private javax.swing.JTextField edtCMND;
@@ -563,12 +705,16 @@ public class ManagerMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbError;
+    private javax.swing.JLabel lbFileDiem;
     private javax.swing.JLabel lbfile;
     private javax.swing.JTable tbDSLop;
+    private javax.swing.JTable tbDiem;
     private javax.swing.JTable tblop;
     // End of variables declaration//GEN-END:variables
 }

@@ -24,8 +24,8 @@ public class Diem  implements java.io.Serializable {
     public Diem(int stt) {
         this.stt = stt;
     }
-    public Diem(int stt, String maSv, String maMon, Float diemGk, Float diemCk, Float diemKhac, Float tongDiem) {
-       this.stt = stt;
+    public Diem(String maSv, String maMon, Float diemGk, Float diemCk, Float diemKhac, Float tongDiem) {
+       //this.stt = stt;
        this.maSv = maSv;
        this.maMon = maMon;
        this.diemGk = diemGk;
