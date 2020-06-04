@@ -185,4 +185,24 @@ public class QLSVDao {
         }
         return dsDiem;
     }
+    
+    public static void updateDiem(Diem d) {
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+//        if (QLSVDao.laySinhVien(d.getMaSv()) == null) {
+//            return;
+//        }
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(d);
+            transaction.commit();
+        } catch (HibernateException ex) {
+//Log the exception
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        //return true;
+    }
 }
