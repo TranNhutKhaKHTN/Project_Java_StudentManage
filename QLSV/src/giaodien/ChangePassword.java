@@ -5,6 +5,11 @@
  */
 package giaodien;
 
+import dao.QLSVDao;
+import java.util.Locale;
+import javax.swing.JOptionPane;
+import pojo.Tkdangnhap;
+
 /**
  *
  * @author HP
@@ -28,26 +33,20 @@ public class ChangePassword extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        edtUserName = new javax.swing.JTextField();
+        edtUsername = new javax.swing.JTextField();
         edtPassWord = new javax.swing.JPasswordField();
-        edtRetire = new javax.swing.JPasswordField();
+        edtPassMoi = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnDoiMK = new javax.swing.JButton();
-        edtRetire1 = new javax.swing.JPasswordField();
+        edtRetype = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel1.setText("Đổi mật khẩu");
-
-        edtRetire.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edtRetireActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Username");
@@ -62,12 +61,6 @@ public class ChangePassword extends javax.swing.JFrame {
         btnDoiMK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDoiMKActionPerformed(evt);
-            }
-        });
-
-        edtRetire1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edtRetire1ActionPerformed(evt);
             }
         });
 
@@ -89,11 +82,11 @@ public class ChangePassword extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(edtPassWord)
-                        .addComponent(edtUserName)
+                        .addComponent(edtUsername)
                         .addComponent(jLabel1)
-                        .addComponent(edtRetire, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
-                    .addComponent(btnDoiMK, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtRetire1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(edtPassMoi, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
+                    .addComponent(edtRetype, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDoiMK, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,7 +96,7 @@ public class ChangePassword extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(edtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -111,12 +104,12 @@ public class ChangePassword extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(edtRetire, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtPassMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(edtRetire1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edtRetype, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addComponent(btnDoiMK, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -125,17 +118,35 @@ public class ChangePassword extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void edtRetireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtRetireActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_edtRetireActionPerformed
-
     private void btnDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMKActionPerformed
         // TODO add your handling code here:
+        String UserName = edtUsername.getText().toString();
+        String MK = edtPassWord.getText().toString();
+        String Retype = edtRetype.getText().toString();
+        String MKMoi = edtPassMoi.getText().toString();
+        Tkdangnhap tk = null;
+        tk=QLSVDao.laySinhVien(UserName);
+        if(tk!=null)
+        {
+            if (MK.equals(tk.getPassword())) {
+                if (Retype.equals(MKMoi)) {
+                    tk.setPassword(MKMoi);
+                    QLSVDao.doiMatKhau(tk);
+                    JOptionPane.showMessageDialog(rootPane, "đổi mật khẩu thành công");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "retype không đúng");
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(rootPane, "Sai username hoặc password");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(rootPane, "Sai username hoặc password");
+        }
     }//GEN-LAST:event_btnDoiMKActionPerformed
-
-    private void edtRetire1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtRetire1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_edtRetire1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,10 +185,10 @@ public class ChangePassword extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDoiMK;
+    private javax.swing.JPasswordField edtPassMoi;
     private javax.swing.JPasswordField edtPassWord;
-    private javax.swing.JPasswordField edtRetire;
-    private javax.swing.JPasswordField edtRetire1;
-    private javax.swing.JTextField edtUserName;
+    private javax.swing.JPasswordField edtRetype;
+    private javax.swing.JTextField edtUsername;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

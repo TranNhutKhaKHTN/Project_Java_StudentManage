@@ -205,4 +205,20 @@ public class QLSVDao {
         }
         //return true;
     }
+    
+    public static void doiMatKhau(Tkdangnhap tk)
+    {
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(tk);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+    }
 }
