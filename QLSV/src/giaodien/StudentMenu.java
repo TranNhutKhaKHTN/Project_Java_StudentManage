@@ -5,17 +5,25 @@
  */
 package giaodien;
 
+import dao.QLSVDao;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import pojo.Diem;
+
 /**
  *
  * @author HP
  */
 public class StudentMenu extends javax.swing.JFrame {
 
+    private DefaultTableModel dfmtbDiem;
     /**
      * Creates new form StudentMenu
      */
     public StudentMenu() {
         initComponents();
+        dfmtbDiem = (DefaultTableModel) tbDiemSV.getModel();
     }
 
     /**
@@ -31,6 +39,8 @@ public class StudentMenu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         xemDiem = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbDiemSV = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         maSV = new javax.swing.JTextField();
         hoTen = new javax.swing.JTextField();
@@ -54,6 +64,36 @@ public class StudentMenu extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Xem tất cả" }));
 
         xemDiem.setText("Xem");
+        xemDiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xemDiemActionPerformed(evt);
+            }
+        });
+
+        tbDiemSV.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STT", "Môn", "Điểm GK", "Điểm CK", "Điểm Khác", "Tổng Điểm", "Kết Quả"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbDiemSV);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -61,10 +101,13 @@ public class StudentMenu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(xemDiem)
-                .addContainerGap(267, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(xemDiem)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,7 +116,9 @@ public class StudentMenu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(xemDiem))
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Xem điểm", jPanel1);
@@ -241,6 +286,34 @@ public class StudentMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_hoTenActionPerformed
 
+    private void xemDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xemDiemActionPerformed
+        // TODO add your handling code here:
+        String MSSV = DangNhap.MSSV;
+        ArrayList<Diem> ds = QLSVDao.layDiemSV(MSSV);
+        String ketQua="";
+        if(ds.isEmpty())
+        {
+            JOptionPane.showMessageDialog(rootPane, "khong co gi");
+        }
+        for(int i=0;i<ds.size();i++)
+        {
+            ketQua="R";
+            if(ds.get(i).getKetQua()==1)
+            {
+                ketQua="Đ";
+            }
+            dfmtbDiem.addRow(new Object[]{
+            i+1,
+            ds.get(i).getMaMon(),
+            ds.get(i).getDiemGk(),
+            ds.get(i).getDiemCk(),
+            ds.get(i).getDiemKhac(),
+            ds.get(i).getTongDiem(),
+            ketQua
+            });
+        }
+    }//GEN-LAST:event_xemDiemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -291,11 +364,13 @@ public class StudentMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextPane lyDo;
     private javax.swing.JTextField maSV;
     private javax.swing.JTextField mon;
+    private javax.swing.JTable tbDiemSV;
     private javax.swing.JButton xemDiem;
     private javax.swing.JButton xemKQPK;
     // End of variables declaration//GEN-END:variables

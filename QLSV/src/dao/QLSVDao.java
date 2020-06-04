@@ -221,4 +221,31 @@ public class QLSVDao {
             session.close();
         }
     }
+    
+    public static ArrayList<Diem> layDiemSV(String MSSV)
+    {
+        ArrayList<Diem> ds = null;
+        //ArrayList<Diem> dsDiem= new ArrayList<>();
+        Session session;
+        session = NewHibernateUtil.getSessionFactory()
+                .openSession();
+        try {
+            String hql = "from Diem diem where diem.maSv=:maSV";
+            Query query = session.createQuery(hql);
+            query.setString("maSV", MSSV);
+            ds = (ArrayList<Diem>) query.list();
+//            for(int i=0;i<ds.size();i++)
+//            {               
+//                if(ds.get(i).getLop().equals(tenLop))
+//                {
+//                    dsDiem.add(ds.get(i));
+//                }
+//            }
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
+    }
 }
