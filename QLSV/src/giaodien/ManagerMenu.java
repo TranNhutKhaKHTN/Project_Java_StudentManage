@@ -886,8 +886,8 @@ public class ManagerMenu extends javax.swing.JFrame {
                         diem.getDiemCk(),
                         diem.getDiemKhac(),
                         diem.getTongDiem()});
-            }
-
+                }
+                reader.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -905,6 +905,7 @@ public class ManagerMenu extends javax.swing.JFrame {
             Tkdangnhap tk = new Tkdangnhap(ms,ms,0);
             QLSVDao.themTaiKhoanDN(tk);
         }
+        JOptionPane.showMessageDialog(rootPane, "thêm danh sách lớp thành công");
     }//GEN-LAST:event_btnThemDSLopActionPerformed
 
     private void btnChonFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonFileActionPerformed
@@ -938,7 +939,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                         lop.getLop(),
                         lop.getCmnd() });
             }
-
+                reader.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -1083,7 +1084,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                     tkb.getPhong()
                     });
             }
-
+                reader.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

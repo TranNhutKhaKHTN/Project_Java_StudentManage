@@ -136,6 +136,7 @@ public class DangNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane,"sai username hoặc mật khẩu");
         }
         MSSV = tks.get(mark).getMssv();
+        
         if(PassWord.equals(tks.get(mark).getPassword()))
         {
             if(tks.get(mark).getIsGv()==1)
