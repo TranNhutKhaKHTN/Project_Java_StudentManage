@@ -15,6 +15,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import pojo.Diem;
 import pojo.Lop;
+import pojo.Tkbieu;
 import pojo.Tkdangnhap;
 import util.NewHibernateUtil;
 
@@ -247,5 +248,23 @@ public class QLSVDao {
             session.close();
         }
         return ds;
+    }
+    
+    public static void ThemTKB(Tkbieu tkb)
+    {
+        Session session;
+        session = NewHibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(tkb);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            transaction.rollback();
+            System.err.println(ex);
+            //kq = false;
+        } finally {
+            session.close();
+        }
     }
 }

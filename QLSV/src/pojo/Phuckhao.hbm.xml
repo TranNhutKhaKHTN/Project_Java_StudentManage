@@ -24,7 +24,7 @@
             <column name="diemMongDoi" length="45" />
         </property>
         <property name="liDo" type="string">
-            <column name="liDo" length="45" />
+            <column name="liDo" length="400" />
         </property>
         <property name="trangThai" type="string">
             <column name="trangThai" length="45" />
