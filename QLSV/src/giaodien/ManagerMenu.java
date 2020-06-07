@@ -137,6 +137,12 @@ public class ManagerMenu extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tbThemTKB = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tbXemTKB = new javax.swing.JTable();
+        edtLopXEMTKB = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        btnXemTKB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -751,10 +757,77 @@ public class ManagerMenu extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Thêm thời khóa biểu", jPanel1);
+
+        tbXemTKB.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STT", "Mã môn", "Tên môn", "Lớp", "Phòng"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(tbXemTKB);
+
+        jLabel16.setText("Chọn lớp");
+
+        btnXemTKB.setText("Xem");
+        btnXemTKB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXemTKBActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel16)
+                        .addGap(29, 29, 29)
+                        .addComponent(edtLopXEMTKB, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(btnXemTKB))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(116, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edtLopXEMTKB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16)
+                    .addComponent(btnXemTKB))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+        );
+
+        jTabbedPane4.addTab("Xem thời khóa biểu", jPanel5);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -1102,6 +1175,29 @@ public class ManagerMenu extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "thêm thời khóa biểu thành công");
     }//GEN-LAST:event_btnThemTKBActionPerformed
 
+    private void btnXemTKBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemTKBActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Tkbieu> ListTKB=null;
+        String lop=edtLopXEMTKB.getText();
+        ListTKB = QLSVDao.LayDSTKB(lop);
+        if(ListTKB.isEmpty())
+        {
+            JOptionPane.showMessageDialog(rootPane, "không có thời khóa biểu cho lớp cần tìm");
+        }
+        DefaultTableModel dfmXemTKB=(DefaultTableModel) tbXemTKB.getModel();
+        dfmXemTKB.setRowCount(0);
+        for(int i=0;i<ListTKB.size();i++)
+        {
+            dfmXemTKB.addRow(new Object[]{
+                i+1,
+                ListTKB.get(i).getMaMon(),
+                ListTKB.get(i).getTenMon(),
+                ListTKB.get(i).getLop(),
+                ListTKB.get(i).getPhong()
+            });
+        }
+    }//GEN-LAST:event_btnXemTKBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1160,6 +1256,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnThemSinhVien;
     private javax.swing.JButton btnThemTKB;
     private javax.swing.JButton btnXemDiem;
+    private javax.swing.JButton btnXemTKB;
     private javax.swing.JButton btnXemThongTinLop;
     private javax.swing.JTextField edtCMND;
     private javax.swing.JTextField edtDiemCK;
@@ -1169,6 +1266,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     private javax.swing.JTextField edtHoTen;
     private javax.swing.JTextField edtLop;
     private javax.swing.JTextField edtLopDiem;
+    private javax.swing.JTextField edtLopXEMTKB;
     private javax.swing.JTextField edtMSSV;
     private javax.swing.JTextField edtTenLop;
     private javax.swing.JTextField edtTongDiem;
@@ -1180,6 +1278,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1194,6 +1293,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
@@ -1202,6 +1302,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
@@ -1218,6 +1319,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     private javax.swing.JTable tbDiem;
     private javax.swing.JTable tbThemTKB;
     private javax.swing.JTable tbXemDiem;
+    private javax.swing.JTable tbXemTKB;
     private javax.swing.JTable tblop;
     // End of variables declaration//GEN-END:variables
 }

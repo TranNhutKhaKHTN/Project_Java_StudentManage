@@ -267,4 +267,44 @@ public class QLSVDao {
             session.close();
         }
     }
+    
+    public static Lop GetSinhVien(String MSSV)
+    {
+        Lop lop=null;
+        Session session;
+        session = NewHibernateUtil.getSessionFactory()
+                .openSession();
+        try {
+            String hql = "from Lop lp where lp.mssv=:maSV";
+            Query query = session.createQuery(hql);
+            query.setString("maSV", MSSV);
+            lop = (Lop) query.list();
+
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return lop;
+    }
+    
+    public static ArrayList<Tkbieu> LayDSTKB(String lop)
+    {
+        ArrayList<Tkbieu> ds = null;
+        
+        Session session;
+        session = NewHibernateUtil.getSessionFactory()
+                .openSession();
+        try {
+            String hql = "from Tkbieu tkb where tkb.lop=:LOP";
+            Query query = session.createQuery(hql);
+            query.setString("LOP", lop);
+            ds = (ArrayList<Tkbieu>) query.list();
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
+    }
 }
