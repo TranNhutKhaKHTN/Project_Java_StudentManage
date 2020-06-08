@@ -30,6 +30,16 @@ public class Phuckhao  implements java.io.Serializable {
        this.liDo = liDo;
        this.trangThai = trangThai;
     }
+
+    public Phuckhao(String MSSV, String hoTen, String mon, String cotDiem, String diemMongdoi, String lyDo) {
+        this.maSv=MSSV;
+        this.ten=hoTen;
+        this.maMon=mon;
+        this.cotDiem=cotDiem;
+        this.diemMongDoi=diemMongdoi;
+        this.liDo=lyDo;
+        this.trangThai="C";
+    }
    
     public Integer getStt() {
         return this.stt;

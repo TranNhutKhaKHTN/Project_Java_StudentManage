@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pojo.Diem;
+import pojo.Phuckhao;
 
 /**
  *
@@ -42,20 +43,20 @@ public class StudentMenu extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDiemSV = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        maSV = new javax.swing.JTextField();
-        hoTen = new javax.swing.JTextField();
-        mon = new javax.swing.JTextField();
-        cotDiem = new javax.swing.JTextField();
-        diemMongMuon = new javax.swing.JTextField();
+        edtmaSV = new javax.swing.JTextField();
+        edthoTen = new javax.swing.JTextField();
+        edtMon = new javax.swing.JTextField();
+        edtcotDiem = new javax.swing.JTextField();
+        edtDiemMongMuon = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        Submit = new javax.swing.JButton();
+        btnSubmitPK = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        lyDo = new javax.swing.JTextPane();
+        txlyDo = new javax.swing.JTextPane();
         jPanel3 = new javax.swing.JPanel();
         xemKQPK = new javax.swing.JButton();
 
@@ -123,21 +124,21 @@ public class StudentMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Xem điểm", jPanel1);
 
-        hoTen.addActionListener(new java.awt.event.ActionListener() {
+        edthoTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hoTenActionPerformed(evt);
+                edthoTenActionPerformed(evt);
             }
         });
 
-        mon.addActionListener(new java.awt.event.ActionListener() {
+        edtMon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                monActionPerformed(evt);
+                edtMonActionPerformed(evt);
             }
         });
 
-        diemMongMuon.addActionListener(new java.awt.event.ActionListener() {
+        edtDiemMongMuon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                diemMongMuonActionPerformed(evt);
+                edtDiemMongMuonActionPerformed(evt);
             }
         });
 
@@ -153,9 +154,14 @@ public class StudentMenu extends javax.swing.JFrame {
 
         jLabel6.setText("lý do");
 
-        Submit.setText("Gửi đơn");
+        btnSubmitPK.setText("Gửi đơn");
+        btnSubmitPK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitPKActionPerformed(evt);
+            }
+        });
 
-        jScrollPane2.setViewportView(lyDo);
+        jScrollPane2.setViewportView(txlyDo);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -171,13 +177,13 @@ public class StudentMenu extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(maSV)
-                            .addComponent(hoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
+                            .addComponent(edtmaSV)
+                            .addComponent(edthoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
                         .addGap(57, 57, 57)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(mon)
-                            .addComponent(cotDiem)
-                            .addComponent(diemMongMuon, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)))
+                            .addComponent(edtMon)
+                            .addComponent(edtcotDiem)
+                            .addComponent(edtDiemMongMuon, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(120, 120, 120)
@@ -194,14 +200,14 @@ public class StudentMenu extends javax.swing.JFrame {
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Submit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSubmitPK, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(Submit)
+                .addComponent(btnSubmitPK)
                 .addGap(4, 4, 4)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -214,20 +220,20 @@ public class StudentMenu extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(11, 11, 11)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(maSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(edtmaSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(edtMon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cotDiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(edtcotDiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(edthoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(diemMongMuon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(edtDiemMongMuon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26))
         );
 
@@ -274,17 +280,17 @@ public class StudentMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void monActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monActionPerformed
+    private void edtMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtMonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_monActionPerformed
+    }//GEN-LAST:event_edtMonActionPerformed
 
-    private void diemMongMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diemMongMuonActionPerformed
+    private void edtDiemMongMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtDiemMongMuonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_diemMongMuonActionPerformed
+    }//GEN-LAST:event_edtDiemMongMuonActionPerformed
 
-    private void hoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hoTenActionPerformed
+    private void edthoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edthoTenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_hoTenActionPerformed
+    }//GEN-LAST:event_edthoTenActionPerformed
 
     private void xemDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xemDiemActionPerformed
         // TODO add your handling code here:
@@ -313,6 +319,19 @@ public class StudentMenu extends javax.swing.JFrame {
             });
         }
     }//GEN-LAST:event_xemDiemActionPerformed
+
+    private void btnSubmitPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitPKActionPerformed
+        // TODO add your handling code here:
+        String MSSV = edtmaSV.getText().toString();
+        String hoTen = edthoTen.getText().toString();
+        String mon = edtMon.getText().toString();
+        String cotDiem = edtcotDiem.getText().toString();
+        String diemMongdoi =edtDiemMongMuon.getText().toString();
+        String lyDo = txlyDo.getText();
+        Phuckhao pk =new Phuckhao(MSSV,hoTen,mon,cotDiem,diemMongdoi,lyDo);
+        QLSVDao.themPhucKhao(pk);
+        JOptionPane.showMessageDialog(rootPane, "Gửi phúc khảo thành công");
+    }//GEN-LAST:event_btnSubmitPKActionPerformed
 
     /**
      * @param args the command line arguments
@@ -350,10 +369,12 @@ public class StudentMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Submit;
-    private javax.swing.JTextField cotDiem;
-    private javax.swing.JTextField diemMongMuon;
-    private javax.swing.JTextField hoTen;
+    private javax.swing.JButton btnSubmitPK;
+    private javax.swing.JTextField edtDiemMongMuon;
+    private javax.swing.JTextField edtMon;
+    private javax.swing.JTextField edtcotDiem;
+    private javax.swing.JTextField edthoTen;
+    private javax.swing.JTextField edtmaSV;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -367,10 +388,8 @@ public class StudentMenu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextPane lyDo;
-    private javax.swing.JTextField maSV;
-    private javax.swing.JTextField mon;
     private javax.swing.JTable tbDiemSV;
+    private javax.swing.JTextPane txlyDo;
     private javax.swing.JButton xemDiem;
     private javax.swing.JButton xemKQPK;
     // End of variables declaration//GEN-END:variables

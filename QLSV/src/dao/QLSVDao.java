@@ -15,6 +15,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import pojo.Diem;
 import pojo.Lop;
+import pojo.Phuckhao;
 import pojo.Tkbieu;
 import pojo.Tkdangnhap;
 import util.NewHibernateUtil;
@@ -300,6 +301,43 @@ public class QLSVDao {
             Query query = session.createQuery(hql);
             query.setString("LOP", lop);
             ds = (ArrayList<Tkbieu>) query.list();
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
+    }
+    
+    public static void themPhucKhao(Phuckhao pk)
+    {
+        Session session;
+        session = NewHibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(pk);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            transaction.rollback();
+            System.err.println(ex);
+            //kq = false;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public static ArrayList<Phuckhao> layDanhSachPhucKhao()
+    {
+        ArrayList<Phuckhao> ds = null;
+        Session session;
+        session = NewHibernateUtil.getSessionFactory()
+                .openSession();
+        try {
+            String hql = "from Phuckhao PK where PK.trangThai=:tt";
+            Query query = session.createQuery(hql);
+            query.setString("tt", "C");
+            ds = (ArrayList<Phuckhao>) query.list();
         } catch (HibernateException ex) {
             System.err.println(ex);
         } finally {
