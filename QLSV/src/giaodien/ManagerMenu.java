@@ -35,10 +35,11 @@ public class ManagerMenu extends javax.swing.JFrame {
     private ArrayList<Diem> DSDiem;
     private DefaultTableModel dfmXemDiem;
     private ArrayList<Diem> DSDiemCanChinh;
-    int selectedIndexTB;
+    int selectedIndexTB=-1;
     private DefaultTableModel dfmThemTKB;
     private ArrayList<Tkbieu> TKBieu;
     private ArrayList<Phuckhao> DSPhucKhao;
+    int IndexTBPK=-1;
     /**
      * Creates new form NewJFrame
      */
@@ -750,19 +751,17 @@ public class ManagerMenu extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane5)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbFileTKB, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
+                        .addComponent(lbFileTKB, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
-                        .addComponent(btnThemTKB)
-                        .addGap(36, 36, 36))))
+                        .addGap(55, 55, 55)
+                        .addComponent(btnThemTKB)))
+                .addGap(33, 33, 33))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -773,8 +772,8 @@ public class ManagerMenu extends javax.swing.JFrame {
                     .addComponent(lbFileTKB)
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Thêm thời khóa biểu", jPanel1);
@@ -829,7 +828,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -852,8 +851,8 @@ public class ManagerMenu extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -947,10 +946,12 @@ public class ManagerMenu extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnXemDSPhucKhao)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
+                        .addComponent(jScrollPane8)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel6Layout.createSequentialGroup()
                                     .addComponent(jLabel17)
@@ -960,36 +961,31 @@ public class ManagerMenu extends javax.swing.JFrame {
                                     .addComponent(jLabel19))
                                 .addGroup(jPanel6Layout.createSequentialGroup()
                                     .addGap(25, 25, 25)
-                                    .addComponent(lbPKMSSV, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(38, 38, 38)
-                                    .addComponent(lbPKMon, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(45, 45, 45)
+                                    .addComponent(lbPKMSSV, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(32, 32, 32)
+                                    .addComponent(lbPKMon, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(44, 44, 44)
                                     .addComponent(lbPKCotDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel6Layout.createSequentialGroup()
-                                    .addGap(31, 31, 31)
-                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnXemDSPhucKhao)
-                                        .addGroup(jPanel6Layout.createSequentialGroup()
-                                            .addGap(28, 28, 28)
-                                            .addComponent(lbPKDiemMongDoi, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(59, 59, 59)
-                                            .addComponent(btnDuyetPK)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btnHuyPK))))
-                                .addGroup(jPanel6Layout.createSequentialGroup()
                                     .addGap(23, 23, 23)
-                                    .addComponent(jLabel21)))))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(92, Short.MAX_VALUE))
+                                    .addComponent(jLabel21))
+                                .addGroup(jPanel6Layout.createSequentialGroup()
+                                    .addGap(59, 59, 59)
+                                    .addComponent(lbPKDiemMongDoi, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(53, 53, 53)
+                                    .addComponent(btnDuyetPK, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnHuyPK, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnXemDSPhucKhao)
                 .addGap(15, 15, 15)
+                .addComponent(btnXemDSPhucKhao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(jLabel18)
@@ -1274,20 +1270,23 @@ public class ManagerMenu extends javax.swing.JFrame {
 
     private void btnLuuThayDoiDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuThayDoiDiemActionPerformed
         // TODO add your handling code here:
-        float DiemGKMoi = Float.parseFloat(edtDiemGK.getText().toString());
-        float DiemCKMoi = Float.parseFloat(edtDiemCK.getText().toString());
-        float DiemKhacMoi = Float.parseFloat(edtDiemKhac.getText().toString());
-        float TongDiemMoi = Float.parseFloat(edtTongDiem.getText().toString());
-        
-        Diem d = DSDiemCanChinh.get(selectedIndexTB);
-        d.setDiemGk(DiemGKMoi);
-        d.setDiemCk(DiemCKMoi);
-        d.setDiemKhac(DiemKhacMoi);
-        d.setTongDiem(TongDiemMoi);
-        
-        //gọi hàm lưu lại
-        QLSVDao.updateDiem(d);
-        JOptionPane.showMessageDialog(rootPane, "lưu thành công!");
+        if(selectedIndexTB>=0)
+        {
+            float DiemGKMoi = Float.parseFloat(edtDiemGK.getText().toString());
+            float DiemCKMoi = Float.parseFloat(edtDiemCK.getText().toString());
+            float DiemKhacMoi = Float.parseFloat(edtDiemKhac.getText().toString());
+            float TongDiemMoi = Float.parseFloat(edtTongDiem.getText().toString());
+
+            Diem d = DSDiemCanChinh.get(selectedIndexTB);
+            d.setDiemGk(DiemGKMoi);
+            d.setDiemCk(DiemCKMoi);
+            d.setDiemKhac(DiemKhacMoi);
+            d.setTongDiem(TongDiemMoi);
+
+            //gọi hàm lưu lại
+            QLSVDao.updateDiem(d);
+            JOptionPane.showMessageDialog(rootPane, "lưu thành công!");
+        }
     }//GEN-LAST:event_btnLuuThayDoiDiemActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1368,10 +1367,22 @@ public class ManagerMenu extends javax.swing.JFrame {
 
     private void btnHuyPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyPKActionPerformed
         // TODO add your handling code here:
+        if(IndexTBPK>=0)
+        {
+            Phuckhao pk = DSPhucKhao.get(IndexTBPK);
+            pk.setTrangThai("H");
+            QLSVDao.luuTrangThaiPhucKhao(pk);
+        }
     }//GEN-LAST:event_btnHuyPKActionPerformed
 
     private void btnDuyetPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDuyetPKActionPerformed
         // TODO add your handling code here:
+        if(IndexTBPK>=0)
+        {
+            Phuckhao pk = DSPhucKhao.get(IndexTBPK);
+            pk.setTrangThai("D");
+            QLSVDao.luuTrangThaiPhucKhao(pk);
+        }
     }//GEN-LAST:event_btnDuyetPKActionPerformed
 
     private void btnXemDSPhucKhaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemDSPhucKhaoActionPerformed
@@ -1401,6 +1412,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     private void tbXemPKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbXemPKMouseClicked
         // TODO add your handling code here:
         int index = tbXemPK.getSelectedRow();
+        IndexTBPK=index;
         Phuckhao pk=DSPhucKhao.get(index);
         lbPKMSSV.setText(pk.getMaSv());
         lbPKMon.setText(pk.getMaMon());

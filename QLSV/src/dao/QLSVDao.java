@@ -345,4 +345,19 @@ public class QLSVDao {
         }
         return ds;
     }
+    public static void luuTrangThaiPhucKhao(Phuckhao pk)
+    {
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(pk);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+    }
 }
