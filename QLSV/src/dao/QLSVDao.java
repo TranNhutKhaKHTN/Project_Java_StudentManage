@@ -360,4 +360,23 @@ public class QLSVDao {
             session.close();
         }
     }
+    
+    public static ArrayList<Phuckhao> layKetQuaPhucKhao(String maSV)
+    {
+        ArrayList<Phuckhao> ds = null;
+        Session session;
+        session = NewHibernateUtil.getSessionFactory()
+                .openSession();
+        try {
+            String hql = "from Phuckhao PK where PK.maSv=:MSSV";
+            Query query = session.createQuery(hql);
+            query.setString("MSSV", maSV);
+            ds = (ArrayList<Phuckhao>) query.list();
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
+    }
 }

@@ -58,7 +58,9 @@ public class StudentMenu extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txlyDo = new javax.swing.JTextPane();
         jPanel3 = new javax.swing.JPanel();
-        xemKQPK = new javax.swing.JButton();
+        btnXemKQPK = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbXemKQPK = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -239,23 +241,59 @@ public class StudentMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Gửi đơn phúc khảo", jPanel2);
 
-        xemKQPK.setText("Xem ket qua phuc khao");
+        btnXemKQPK.setText("Xem ket qua phuc khao");
+        btnXemKQPK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXemKQPKActionPerformed(evt);
+            }
+        });
+
+        tbXemKQPK.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Môn", "Cột Điểm", "Điểm mong đợi", "Kết quả"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tbXemKQPK);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(380, Short.MAX_VALUE)
-                .addComponent(xemKQPK, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnXemKQPK, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(xemKQPK)
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addComponent(btnXemKQPK)
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Kết quả phúc khảo", jPanel3);
@@ -333,6 +371,45 @@ public class StudentMenu extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Gửi phúc khảo thành công");
     }//GEN-LAST:event_btnSubmitPKActionPerformed
 
+    private void btnXemKQPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemKQPKActionPerformed
+        // TODO add your handling code here:
+        String Mssv=DangNhap.MSSV;
+        ArrayList<Phuckhao> dsPK=QLSVDao.layKetQuaPhucKhao(Mssv);
+        DefaultTableModel dfmXemKQPK=(DefaultTableModel) tbXemKQPK.getModel();
+        if(dsPK.isEmpty())
+        {
+            JOptionPane.showMessageDialog(rootPane, "bạn không có yêu cầu phúc khảo nào");
+            dfmXemKQPK.setRowCount(0);
+        }
+        else
+        {
+            dfmXemKQPK.setRowCount(0);
+            for(int i=0;i<dsPK.size();i++)
+            {
+                Phuckhao pk = dsPK.get(i);
+                String KQ=pk.getTrangThai();
+                if(KQ.equals("C"))
+                {
+                    KQ="Đang phê duyệt";
+                }
+                if(KQ.equals("D"))
+                {
+                    KQ="Đã duyệt";
+                }
+                if(KQ.equals("H"))
+                {
+                    KQ="Không được phê duyệt";
+                }
+                dfmXemKQPK.addRow(new Object[]{
+                    pk.getMaMon(),
+                    pk.getCotDiem(),
+                    pk.getDiemMongDoi(),
+                    KQ
+                });
+            }
+        }
+    }//GEN-LAST:event_btnXemKQPKActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -370,6 +447,7 @@ public class StudentMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmitPK;
+    private javax.swing.JButton btnXemKQPK;
     private javax.swing.JTextField edtDiemMongMuon;
     private javax.swing.JTextField edtMon;
     private javax.swing.JTextField edtcotDiem;
@@ -387,10 +465,11 @@ public class StudentMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tbDiemSV;
+    private javax.swing.JTable tbXemKQPK;
     private javax.swing.JTextPane txlyDo;
     private javax.swing.JButton xemDiem;
-    private javax.swing.JButton xemKQPK;
     // End of variables declaration//GEN-END:variables
 }
