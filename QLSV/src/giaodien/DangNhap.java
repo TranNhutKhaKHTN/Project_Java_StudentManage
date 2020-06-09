@@ -17,6 +17,8 @@ import pojo.Tkdangnhap;
 public class DangNhap extends javax.swing.JFrame {
 
     public static String MSSV;
+    public static ManagerMenu jp1;
+    public static StudentMenu stdmn;
     /**
      * Creates new form DangNhap
      */
@@ -141,13 +143,13 @@ public class DangNhap extends javax.swing.JFrame {
         {
             if(tks.get(mark).getIsGv()==1)
             {
-                ManagerMenu jp1 = new ManagerMenu();
+                jp1 = new ManagerMenu();
                 dn.setVisible(false);
                 jp1.setVisible(true);
             }
             else
             {
-                StudentMenu stdmn= new StudentMenu();
+                stdmn= new StudentMenu();
                 dn.setVisible(false);
                 stdmn.setVisible(true);
             }

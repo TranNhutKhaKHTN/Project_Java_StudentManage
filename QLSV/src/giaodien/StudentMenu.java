@@ -7,6 +7,7 @@ package giaodien;
 
 import dao.QLSVDao;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pojo.Diem;
@@ -61,8 +62,10 @@ public class StudentMenu extends javax.swing.JFrame {
         btnXemKQPK = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbXemKQPK = new javax.swing.JTable();
+        btnDangXuat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Student Menu");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Xem tất cả" }));
 
@@ -298,6 +301,13 @@ public class StudentMenu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Kết quả phúc khảo", jPanel3);
 
+        btnDangXuat.setText("Đăng xuất");
+        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangXuatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -306,11 +316,17 @@ public class StudentMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTabbedPane1)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDangXuat)
+                .addGap(82, 82, 82))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(btnDangXuat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -410,9 +426,18 @@ public class StudentMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnXemKQPKActionPerformed
 
+    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
+        // TODO add your handling code here:
+        //StudentMenu.EXIT_ON_CLOSE;
+        DangNhap.stdmn.setVisible(false);
+        DangNhap.stdmn.dispose();
+        
+    }//GEN-LAST:event_btnDangXuatActionPerformed
+
     /**
      * @param args the command line arguments
      */
+    public static StudentMenu Stdmn;
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -440,12 +465,14 @@ public class StudentMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentMenu().setVisible(true);
+                Stdmn = new StudentMenu();
+                Stdmn.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDangXuat;
     private javax.swing.JButton btnSubmitPK;
     private javax.swing.JButton btnXemKQPK;
     private javax.swing.JTextField edtDiemMongMuon;
