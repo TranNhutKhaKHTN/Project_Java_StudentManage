@@ -10,7 +10,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -161,6 +164,13 @@ public class ManagerMenu extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        btnTaoPhucKhao = new javax.swing.JButton();
+        edtNBD = new javax.swing.JTextField();
+        edtNKT = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
         btnDangXuat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -1011,7 +1021,61 @@ public class ManagerMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Phúc khảo", jPanel6);
+        jTabbedPane1.addTab("Xem danh sách phúc khảo", jPanel6);
+
+        btnTaoPhucKhao.setText("Tạo ngày phúc khảo");
+        btnTaoPhucKhao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaoPhucKhaoActionPerformed(evt);
+            }
+        });
+
+        jLabel22.setText("Ngày bắt đầu");
+
+        jLabel23.setText("Ngày kết thúc");
+
+        jLabel24.setText("Định dạng ngày: dd/mm/yyyy");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addGap(130, 130, 130)
+                        .addComponent(jLabel23)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addComponent(edtNBD, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addComponent(edtNKT, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(btnTaoPhucKhao)
+                .addGap(94, 94, 94))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jLabel24)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edtNKT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtNBD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTaoPhucKhao))
+                .addContainerGap(228, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Tạo phúc khảo", jPanel11);
 
         btnDangXuat.setText("Đăng xuất");
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
@@ -1445,6 +1509,28 @@ public class ManagerMenu extends javax.swing.JFrame {
         DangNhap.jp1.dispose();
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
+    private void btnTaoPhucKhaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoPhucKhaoActionPerformed
+        // TODO add your handling code here:
+        Date dateBD = new Date();
+        Date dateKT = new Date();
+        String ngBD = edtNBD.getText();
+        String ngKT = edtNKT.getText();
+        if (ngBD.equals("") || ngKT.equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "chưa điền đủ dữ liệu");
+        } else {
+            SimpleDateFormat formatdate = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                dateBD = formatdate.parse(ngBD);
+                dateKT = formatdate.parse(ngKT);
+                Tgphuckhao tgpk = new Tgphuckhao(0,dateBD,dateKT);
+                QLSVDao.themTGPhucKhao(tgpk);
+                JOptionPane.showMessageDialog(rootPane, "thêm thời gian phúc khảo thành công");
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(rootPane, "sai định dạng ngày");
+            }
+       }
+    }//GEN-LAST:event_btnTaoPhucKhaoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1501,6 +1587,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnDuyetPK;
     private javax.swing.JButton btnHuyPK;
     private javax.swing.JButton btnLuuThayDoiDiem;
+    private javax.swing.JButton btnTaoPhucKhao;
     private javax.swing.JButton btnThemDSLop;
     private javax.swing.JButton btnThemDiemVaoHT;
     private javax.swing.JButton btnThemSinhVien;
@@ -1519,6 +1606,8 @@ public class ManagerMenu extends javax.swing.JFrame {
     private javax.swing.JTextField edtLopDiem;
     private javax.swing.JTextField edtLopXEMTKB;
     private javax.swing.JTextField edtMSSV;
+    private javax.swing.JTextField edtNBD;
+    private javax.swing.JTextField edtNKT;
     private javax.swing.JTextField edtTenLop;
     private javax.swing.JTextField edtTongDiem;
     private javax.swing.JButton jButton2;
@@ -1536,6 +1625,9 @@ public class ManagerMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1546,6 +1638,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

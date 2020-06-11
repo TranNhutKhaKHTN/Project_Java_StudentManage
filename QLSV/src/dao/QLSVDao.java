@@ -16,6 +16,7 @@ import org.hibernate.Transaction;
 import pojo.Diem;
 import pojo.Lop;
 import pojo.Phuckhao;
+import pojo.Tgphuckhao;
 import pojo.Tkbieu;
 import pojo.Tkdangnhap;
 import util.NewHibernateUtil;
@@ -236,13 +237,6 @@ public class QLSVDao {
             Query query = session.createQuery(hql);
             query.setString("maSV", MSSV);
             ds = (ArrayList<Diem>) query.list();
-//            for(int i=0;i<ds.size();i++)
-//            {               
-//                if(ds.get(i).getLop().equals(tenLop))
-//                {
-//                    dsDiem.add(ds.get(i));
-//                }
-//            }
         } catch (HibernateException ex) {
             System.err.println(ex);
         } finally {
@@ -323,6 +317,7 @@ public class QLSVDao {
             System.err.println(ex);
             //kq = false;
         } finally {
+            //session.refresh(pk);
             session.close();
         }
     }
@@ -372,6 +367,43 @@ public class QLSVDao {
             Query query = session.createQuery(hql);
             query.setString("MSSV", maSV);
             ds = (ArrayList<Phuckhao>) query.list();
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
+    }
+    
+    public static void themTGPhucKhao(Tgphuckhao tgpk)
+    {
+        Session session;
+        session = NewHibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(tgpk);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            transaction.rollback();
+            System.err.println(ex);
+            //kq = false;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public static ArrayList<Tgphuckhao> layTGPK()
+    {
+        ArrayList<Tgphuckhao> ds = null;
+        
+        Session session;
+        session = NewHibernateUtil.getSessionFactory()
+                .openSession();
+        try {
+            String hql = "select tg from Tgphuckhao tg";
+            Query query = session.createQuery(hql);
+            ds = (ArrayList<Tgphuckhao>) query.list();
         } catch (HibernateException ex) {
             System.err.println(ex);
         } finally {

@@ -51,6 +51,7 @@ Contributor(s):
     <mapping resource="pojo/Phuckhao.hbm.xml"/>
     <mapping resource="pojo/Tkdangnhap.hbm.xml"/>
     <mapping resource="pojo/Diem.hbm.xml"/>
+    <mapping resource="pojo/Tgphuckhao.hbm.xml"/>
     <mapping resource="pojo/Tkbieu.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

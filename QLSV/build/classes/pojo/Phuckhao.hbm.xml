@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jun 3, 2020 2:23:50 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jun 10, 2020 7:55:55 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.Phuckhao" table="phuckhao" catalog="qlsv" optimistic-lock="version">
         <id name="stt" type="java.lang.Integer">

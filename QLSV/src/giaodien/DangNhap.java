@@ -137,21 +137,19 @@ public class DangNhap extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(rootPane,"sai username hoặc mật khẩu");
         }
-        MSSV = tks.get(mark).getMssv();
-        
-        if(PassWord.equals(tks.get(mark).getPassword()))
-        {
-            if(tks.get(mark).getIsGv()==1)
-            {
-                jp1 = new ManagerMenu();
-                dn.setVisible(false);
-                jp1.setVisible(true);
-            }
-            else
-            {
-                stdmn= new StudentMenu();
-                dn.setVisible(false);
-                stdmn.setVisible(true);
+        else {
+            MSSV = tks.get(mark).getMssv();
+
+            if (PassWord.equals(tks.get(mark).getPassword())) {
+                if (tks.get(mark).getIsGv() == 1) {
+                    jp1 = new ManagerMenu();
+                    dn.setVisible(false);
+                    jp1.setVisible(true);
+                } else {
+                    stdmn = new StudentMenu();
+                    dn.setVisible(false);
+                    stdmn.setVisible(true);
+                }
             }
         }
     }//GEN-LAST:event_btnDangNhapActionPerformed

@@ -42,9 +42,10 @@ Contributor(s):
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="qlsv"/>
   <table-filter match-name="loprieng"/>
-  <table-filter match-name="diem"/>
-  <table-filter match-name="lop"/>
   <table-filter match-name="tkbieu"/>
-  <table-filter match-name="tkdangnhap"/>
   <table-filter match-name="phuckhao"/>
+  <table-filter match-name="diem"/>
+  <table-filter match-name="tkdangnhap"/>
+  <table-filter match-name="tgphuckhao"/>
+  <table-filter match-name="lop"/>
 </hibernate-reverse-engineering>
