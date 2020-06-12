@@ -453,21 +453,21 @@ public class StudentMenu extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(rootPane, "chưa đến thời gian phúc khảo");
         }
-        if(now.compareTo(ngKT)>0)
-        {
-             JOptionPane.showMessageDialog(rootPane, "Đã hết hạn phúc khảo");
-        }
         else
         {
-            String MSSV = edtmaSV.getText().toString();
-            String hoTen = edthoTen.getText().toString();
-            String mon = edtMon.getText().toString();
-            String cotDiem = edtcotDiem.getText().toString();
-            String diemMongdoi = edtDiemMongMuon.getText().toString();
-            String lyDo = txlyDo.getText();
-            Phuckhao pk = new Phuckhao(MSSV, hoTen, mon, cotDiem, diemMongdoi, lyDo, "C");
-            QLSVDao.themPhucKhao(pk);
-            JOptionPane.showMessageDialog(rootPane, "Gửi phúc khảo thành công");
+            if (now.compareTo(ngKT) > 0) {
+                JOptionPane.showMessageDialog(rootPane, "Đã hết hạn phúc khảo");
+            } else {
+                String MSSV = edtmaSV.getText().toString();
+                String hoTen = edthoTen.getText().toString();
+                String mon = edtMon.getText().toString();
+                String cotDiem = edtcotDiem.getText().toString();
+                String diemMongdoi = edtDiemMongMuon.getText().toString();
+                String lyDo = txlyDo.getText();
+                Phuckhao pk = new Phuckhao(MSSV, hoTen, mon, cotDiem, diemMongdoi, lyDo, "C");
+                QLSVDao.themPhucKhao(pk);
+                JOptionPane.showMessageDialog(rootPane, "Gửi phúc khảo thành công");
+            }
         }
     }//GEN-LAST:event_btnSubmitPKActionPerformed
 
