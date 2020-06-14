@@ -43,6 +43,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     private ArrayList<Tkbieu> TKBieu;
     private ArrayList<Phuckhao> DSPhucKhao;
     int IndexTBPK=-1;
+    DefaultTableModel dfmXemPK;
     /**
      * Creates new form NewJFrame
      */
@@ -59,6 +60,7 @@ public class ManagerMenu extends javax.swing.JFrame {
         dfmThemTKB = (DefaultTableModel) tbThemTKB.getModel();
         TKBieu = new ArrayList<Tkbieu>();
         DSPhucKhao =new ArrayList<Phuckhao>();
+        dfmXemPK=(DefaultTableModel) tbXemPK.getModel();
     }
     public ManagerMenu() {
         initComponents();
@@ -172,10 +174,12 @@ public class ManagerMenu extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         btnDangXuat = new javax.swing.JButton();
+        jLabel25 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Manager Menu");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
@@ -839,8 +843,8 @@ public class ManagerMenu extends javax.swing.JFrame {
                         .addComponent(btnXemTKB))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(174, Short.MAX_VALUE))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1084,29 +1088,36 @@ public class ManagerMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel25.setText("Quản lý sinh viên");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 20, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDangXuat)
-                .addGap(102, 102, 102))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel25)
+                        .addGap(428, 428, 428)
+                        .addComponent(btnDangXuat))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnDangXuat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDangXuat)
+                    .addComponent(jLabel25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXemDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemDiemActionPerformed
@@ -1453,6 +1464,7 @@ public class ManagerMenu extends javax.swing.JFrame {
             pk.setTrangThai("H");
             QLSVDao.luuTrangThaiPhucKhao(pk);
             JOptionPane.showMessageDialog(rootPane, "Đã hủy yêu cầu phúc khảo");
+            dfmXemPK.removeRow(IndexTBPK);
         }
     }//GEN-LAST:event_btnHuyPKActionPerformed
 
@@ -1464,6 +1476,7 @@ public class ManagerMenu extends javax.swing.JFrame {
             pk.setTrangThai("D");
             QLSVDao.luuTrangThaiPhucKhao(pk);
             JOptionPane.showMessageDialog(rootPane, "Đã duyệt yêu cầu phúc khảo");
+            dfmXemPK.removeRow(IndexTBPK);
         }
     }//GEN-LAST:event_btnDuyetPKActionPerformed
 
@@ -1471,7 +1484,7 @@ public class ManagerMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         DSPhucKhao.clear();
         DSPhucKhao=QLSVDao.layDanhSachPhucKhao();
-        DefaultTableModel dfmXemPK=(DefaultTableModel) tbXemPK.getModel();
+        JOptionPane.showMessageDialog(rootPane, "đã lấy được dữ liệu");
         if(DSPhucKhao.isEmpty())
         {
             JOptionPane.showMessageDialog(rootPane, "không có đơn phúc khảo nào");
@@ -1563,6 +1576,7 @@ public class ManagerMenu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ManagerMenu().setVisible(true);
+          
             }
         });
     }
@@ -1628,6 +1642,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

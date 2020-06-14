@@ -317,8 +317,9 @@ public class QLSVDao {
             System.err.println(ex);
             //kq = false;
         } finally {
-            //session.refresh(pk);
+            session.refresh(pk);
             session.close();
+            
         }
     }
     
@@ -329,6 +330,7 @@ public class QLSVDao {
         session = NewHibernateUtil.getSessionFactory()
                 .openSession();
         try {
+            
             String hql = "from Phuckhao PK where PK.trangThai=:tt";
             Query query = session.createQuery(hql);
             query.setString("tt", "C");

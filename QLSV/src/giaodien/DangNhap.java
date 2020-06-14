@@ -44,6 +44,7 @@ public class DangNhap extends javax.swing.JFrame {
         edtPassWord = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         edtUserName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +116,7 @@ public class DangNhap extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
@@ -144,10 +146,12 @@ public class DangNhap extends javax.swing.JFrame {
                 if (tks.get(mark).getIsGv() == 1) {
                     jp1 = new ManagerMenu();
                     dn.setVisible(false);
+                    jp1.setResizable(false);
                     jp1.setVisible(true);
                 } else {
                     stdmn = new StudentMenu();
                     dn.setVisible(false);
+                    stdmn.setResizable(false);
                     stdmn.setVisible(true);
                 }
             }
@@ -157,6 +161,7 @@ public class DangNhap extends javax.swing.JFrame {
     private void btnDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMKActionPerformed
         // TODO add your handling code here:
         ChangePassword ch = new ChangePassword();
+        ch.setResizable(false);
         ch.setVisible(true);
     }//GEN-LAST:event_btnDoiMKActionPerformed
 
@@ -197,6 +202,7 @@ public class DangNhap extends javax.swing.JFrame {
             public void run() {
                 dn = new DangNhap();
                 dn.setVisible(true);
+                //dn.setResizable(false);
             }
         });
     }
