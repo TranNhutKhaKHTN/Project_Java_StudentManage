@@ -7,9 +7,13 @@ package giaodien;
 
 import dao.QLSVDao;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+//import java.nio.charset.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +26,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pojo.*;
+//import sun.security.krb5.Confounder.bytes;
 
 
 /**
@@ -1180,7 +1185,8 @@ public class ManagerMenu extends javax.swing.JFrame {
             BufferedReader reader;
             String Line;
             try {
-                reader = new BufferedReader(new FileReader(fileName));
+                reader = new BufferedReader(new InputStreamReader( new FileInputStream(fileName),StandardCharsets.UTF_8));
+                reader.read();
                 reader.readLine();
                 int dem=1;
                 dfmDiem.setRowCount(0);
@@ -1244,9 +1250,11 @@ public class ManagerMenu extends javax.swing.JFrame {
             String fileName = chf.getSelectedFile().getPath();
             lbfile.setText(fileName);
             BufferedReader reader;
-            String Line;
+            String Line=new String();
             try {
-                reader = new BufferedReader(new FileReader(fileName));
+                reader = new BufferedReader(new InputStreamReader( new FileInputStream(fileName),StandardCharsets.UTF_8));
+                int so=reader.read();
+                System.out.println(so+"");
                 Line = reader.readLine();
                 int dem=1;
                 dftm.setRowCount(0);
@@ -1279,7 +1287,7 @@ public class ManagerMenu extends javax.swing.JFrame {
         String TenLop = edtTenLop.getText();
         if(TenLop.equals(""))
         {
-            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên lớp");
+            JOptionPane.showMessageDialog(rootPane, "Chưa nhập tên lớp");
         }
         else
         {
@@ -1317,7 +1325,7 @@ public class ManagerMenu extends javax.swing.JFrame {
         String error="Điền đầy đủ thông tin";
         if(MSSV.equals("")||HoTen.equals("")||GioiTinh.equals("")||Lop.equals("")||CMND.equals(""))
         {
-            JOptionPane.showMessageDialog(rootPane, "bạn chưa điền đầy đủ thông tin");
+            JOptionPane.showMessageDialog(rootPane, "Chưa điền đầy đủ thông tin");
         }
         else
         {
@@ -1374,7 +1382,7 @@ public class ManagerMenu extends javax.swing.JFrame {
             d.setDiemKhac(DiemKhacMoi);
             d.setTongDiem(TongDiemMoi);
 
-            //gọi hàm lưu lại
+            //g?i h?m l?u l?i
             QLSVDao.updateDiem(d);
             JOptionPane.showMessageDialog(rootPane, "lưu thành công!");
         }
@@ -1393,7 +1401,8 @@ public class ManagerMenu extends javax.swing.JFrame {
             BufferedReader reader;
             String Line;
             try {
-                reader = new BufferedReader(new FileReader(fileName));
+                reader = new BufferedReader(new InputStreamReader( new FileInputStream(fileName),StandardCharsets.UTF_8));
+                reader.read();
                 Line = reader.readLine();
                 int dem=1;
                 dfmThemTKB.setRowCount(0);
@@ -1428,7 +1437,7 @@ public class ManagerMenu extends javax.swing.JFrame {
         {
             QLSVDao.ThemTKB(TKBieu.get(i));
         }
-        JOptionPane.showMessageDialog(rootPane, "thêm thời khóa biểu thành công");
+        JOptionPane.showMessageDialog(rootPane, "Thêm thời khóa điểu thành công");
     }//GEN-LAST:event_btnThemTKBActionPerformed
 
     private void btnXemTKBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemTKBActionPerformed
@@ -1440,7 +1449,7 @@ public class ManagerMenu extends javax.swing.JFrame {
         if(ListTKB.isEmpty())
         {
             dfmXemTKB.setRowCount(0);
-            JOptionPane.showMessageDialog(rootPane, "không có thời khóa biểu cho lớp cần tìm");
+            JOptionPane.showMessageDialog(rootPane, "Không có thời khóa biểu của lớp cần tìm");
         }
         
         dfmXemTKB.setRowCount(0);
@@ -1484,10 +1493,10 @@ public class ManagerMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         DSPhucKhao.clear();
         DSPhucKhao=QLSVDao.layDanhSachPhucKhao();
-        JOptionPane.showMessageDialog(rootPane, "đã lấy được dữ liệu");
+        //JOptionPane.showMessageDialog(rootPane, "�? l?y �??c d? li?u");
         if(DSPhucKhao.isEmpty())
         {
-            JOptionPane.showMessageDialog(rootPane, "không có đơn phúc khảo nào");
+            JOptionPane.showMessageDialog(rootPane, "Không có đơn phúc khảo nào");
         }
         else {
             dfmXemPK.setRowCount(0);
@@ -1529,17 +1538,24 @@ public class ManagerMenu extends javax.swing.JFrame {
         String ngBD = edtNBD.getText();
         String ngKT = edtNKT.getText();
         if (ngBD.equals("") || ngKT.equals("")) {
-            JOptionPane.showMessageDialog(rootPane, "chưa điền đủ dữ liệu");
+            JOptionPane.showMessageDialog(rootPane, "chưa nhập đủ dữ liệu");
         } else {
             SimpleDateFormat formatdate = new SimpleDateFormat("dd/MM/yyyy");
             try {
                 dateBD = formatdate.parse(ngBD);
                 dateKT = formatdate.parse(ngKT);
-                Tgphuckhao tgpk = new Tgphuckhao(0,dateBD,dateKT);
-                QLSVDao.themTGPhucKhao(tgpk);
-                JOptionPane.showMessageDialog(rootPane, "thêm thời gian phúc khảo thành công");
+                //formatdate.
+                if(!ngBD.equals(formatdate.format(dateBD))){
+                    JOptionPane.showMessageDialog(rootPane, "Sai định dạng ngày");
+                }
+                else
+                {
+                    Tgphuckhao tgpk = new Tgphuckhao(0, dateBD, dateKT);
+                    QLSVDao.themTGPhucKhao(tgpk);
+                    JOptionPane.showMessageDialog(rootPane, "Tạo thời gian phúc khảo thành công");
+                }
             } catch (ParseException e) {
-                JOptionPane.showMessageDialog(rootPane, "sai định dạng ngày");
+                JOptionPane.showMessageDialog(rootPane, "Sai định dạng ngày");
             }
        }
     }//GEN-LAST:event_btnTaoPhucKhaoActionPerformed

@@ -112,7 +112,7 @@ public class DangNhap extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDoiMK, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -148,6 +148,7 @@ public class DangNhap extends javax.swing.JFrame {
                     dn.setVisible(false);
                     jp1.setResizable(false);
                     jp1.setVisible(true);
+                    
                 } else {
                     stdmn = new StudentMenu();
                     dn.setVisible(false);
