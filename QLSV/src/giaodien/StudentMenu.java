@@ -474,9 +474,15 @@ public class StudentMenu extends javax.swing.JFrame {
                 String cotDiem = edtcotDiem.getText().toString();
                 String diemMongdoi = edtDiemMongMuon.getText().toString();
                 String lyDo = txlyDo.getText();
-                Phuckhao pk = new Phuckhao(MSSV, hoTen, mon, cotDiem, diemMongdoi, lyDo, "C");
-                QLSVDao.themPhucKhao(pk);
-                JOptionPane.showMessageDialog(rootPane, "Gửi phúc khảo thành công");
+                if(MSSV.isEmpty()||hoTen.isEmpty()||mon.isEmpty()||cotDiem.isEmpty()||diemMongdoi.isEmpty()||lyDo.isEmpty())
+                {
+                    JOptionPane.showMessageDialog(rootPane, "chưa điền đầy đủ thông tin");
+                }else
+                {
+                    Phuckhao pk = new Phuckhao(MSSV, hoTen, mon, cotDiem, diemMongdoi, lyDo, "C");
+                    QLSVDao.themPhucKhao(pk);
+                    JOptionPane.showMessageDialog(rootPane, "Gửi phúc khảo thành công");
+                }
             }
         }
     }//GEN-LAST:event_btnSubmitPKActionPerformed

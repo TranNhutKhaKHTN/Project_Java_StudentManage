@@ -156,6 +156,10 @@ public class DangNhap extends javax.swing.JFrame {
                     stdmn.setVisible(true);
                 }
             }
+            else
+            {
+                JOptionPane.showMessageDialog(rootPane, "sai user name hoặc mật khẩu");
+            }
         }
     }//GEN-LAST:event_btnDangNhapActionPerformed
 

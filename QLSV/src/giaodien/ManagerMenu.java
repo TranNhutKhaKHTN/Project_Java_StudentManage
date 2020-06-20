@@ -66,6 +66,9 @@ public class ManagerMenu extends javax.swing.JFrame {
         TKBieu = new ArrayList<Tkbieu>();
         DSPhucKhao =new ArrayList<Phuckhao>();
         dfmXemPK=(DefaultTableModel) tbXemPK.getModel();
+        btnThemDSLop.setEnabled(false);
+        btnThemDiemVaoHT.setEnabled(false);
+        btnThemTKB.setEnabled(false);
     }
     public ManagerMenu() {
         initComponents();
@@ -1179,35 +1182,34 @@ public class ManagerMenu extends javax.swing.JFrame {
         int check = chf.showOpenDialog(null);
         if(check==JFileChooser.APPROVE_OPTION)
         {
-
+            
             String fileName = chf.getSelectedFile().getPath();
             lbFileDiem.setText(fileName);
             BufferedReader reader;
             String Line;
             try {
-                reader = new BufferedReader(new InputStreamReader( new FileInputStream(fileName),StandardCharsets.UTF_8));
+                reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8));
                 reader.read();
                 reader.readLine();
-                int dem=1;
+                int dem = 1;
                 dfmDiem.setRowCount(0);
-                while((Line = reader.readLine())!=null)
-                {
+
+                while ((Line = reader.readLine()) != null) {
                     //JOptionPane.showMessageDialog(rootPane,"--" + Line+"--");
                     //Line = reader.readLine();
                     ArrayList a = (ArrayList) pastCSVLine(Line);
-                    String masv = (String)a.get(1);
-                    String mon = (String)a.get(2);
-                    String lop=(String)a.get(3);
-                    float diemGK=Float.parseFloat((String) a.get(4));
-                    float diemCK=Float.parseFloat((String) a.get(5));
-                    float diemKhac=Float.parseFloat((String) a.get(6));
-                    float diemTong=Float.parseFloat((String) a.get(7));
-                    int checkDau=1;
-                    if(diemTong<5)
-                    {
-                        checkDau=0;
+                    String masv = (String) a.get(1);
+                    String mon = (String) a.get(2);
+                    String lop = (String) a.get(3);
+                    float diemGK = Float.parseFloat((String) a.get(4));
+                    float diemCK = Float.parseFloat((String) a.get(5));
+                    float diemKhac = Float.parseFloat((String) a.get(6));
+                    float diemTong = Float.parseFloat((String) a.get(7));
+                    int checkDau = 1;
+                    if (diemTong < 5) {
+                        checkDau = 0;
                     }
-                    Diem diem = new Diem(masv,lop,mon,diemGK,diemCK,diemKhac,diemTong,checkDau);
+                    Diem diem = new Diem(masv, lop, mon, diemGK, diemCK, diemKhac, diemTong, checkDau);
                     DSDiem.add(diem);
 
                     dfmDiem.addRow(new Object[]{dem++,
@@ -1220,11 +1222,12 @@ public class ManagerMenu extends javax.swing.JFrame {
                         diem.getTongDiem()});
                 }
                 reader.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                btnThemDiemVaoHT.setEnabled(true);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnChonFileDiemCSVActionPerformed
 
@@ -1274,6 +1277,7 @@ public class ManagerMenu extends javax.swing.JFrame {
                         lop.getCmnd() });
             }
                 reader.close();
+                btnThemDSLop.setEnabled(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -1381,7 +1385,14 @@ public class ManagerMenu extends javax.swing.JFrame {
             d.setDiemCk(DiemCKMoi);
             d.setDiemKhac(DiemKhacMoi);
             d.setTongDiem(TongDiemMoi);
-
+            if(TongDiemMoi>=5)
+            {
+                d.setKetQua(1);
+            }
+            else
+            {
+                d.setKetQua(0);
+            }
             //g?i h?m l?u l?i
             QLSVDao.updateDiem(d);
             JOptionPane.showMessageDialog(rootPane, "lưu thành công!");
@@ -1394,40 +1405,40 @@ public class ManagerMenu extends javax.swing.JFrame {
         int check = chf.showOpenDialog(null);
         if(check==JFileChooser.APPROVE_OPTION)
         {
-            
+           
             TKBieu.clear();
             String fileName = chf.getSelectedFile().getPath();
             lbFileTKB.setText(fileName);
             BufferedReader reader;
             String Line;
             try {
-                reader = new BufferedReader(new InputStreamReader( new FileInputStream(fileName),StandardCharsets.UTF_8));
+                reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8));
                 reader.read();
                 Line = reader.readLine();
-                int dem=1;
+                int dem = 1;
                 dfmThemTKB.setRowCount(0);
-                while((Line = reader.readLine())!=null)
-                {
+                while ((Line = reader.readLine()) != null) {
                     //Line = reader.readLine();
                     List a = pastCSVLine(Line);
 
                     //Lop lop = new Lop((String)a.get(1),(String)a.get(2),(String)a.get(3),(String)a.get(4),(String)a.get(5));
-                    Tkbieu tkb = new Tkbieu((String)a.get(1),(String)a.get(2),(String)a.get(3),(String)a.get(4));
+                    Tkbieu tkb = new Tkbieu((String) a.get(1), (String) a.get(2), (String) a.get(3), (String) a.get(4));
                     TKBieu.add(tkb);
 
                     dfmThemTKB.addRow(new Object[]{dem++,
-                    tkb.getMaMon(),
-                    tkb.getTenMon(),
-                    tkb.getLop(),
-                    tkb.getPhong()
+                        tkb.getMaMon(),
+                        tkb.getTenMon(),
+                        tkb.getLop(),
+                        tkb.getPhong()
                     });
-            }
+                }
                 reader.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                btnThemTKB.setEnabled(true);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -1474,6 +1485,7 @@ public class ManagerMenu extends javax.swing.JFrame {
             QLSVDao.luuTrangThaiPhucKhao(pk);
             JOptionPane.showMessageDialog(rootPane, "Đã hủy yêu cầu phúc khảo");
             dfmXemPK.removeRow(IndexTBPK);
+            DSPhucKhao.remove(pk);
         }
     }//GEN-LAST:event_btnHuyPKActionPerformed
 
@@ -1486,6 +1498,7 @@ public class ManagerMenu extends javax.swing.JFrame {
             QLSVDao.luuTrangThaiPhucKhao(pk);
             JOptionPane.showMessageDialog(rootPane, "Đã duyệt yêu cầu phúc khảo");
             dfmXemPK.removeRow(IndexTBPK);
+            DSPhucKhao.remove(pk);
         }
     }//GEN-LAST:event_btnDuyetPKActionPerformed
 

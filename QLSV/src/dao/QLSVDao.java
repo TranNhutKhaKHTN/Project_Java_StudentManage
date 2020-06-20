@@ -350,6 +350,7 @@ public class QLSVDao {
             transaction = session.beginTransaction();
             session.update(pk);
             transaction.commit();
+            //session.close();
         } catch (HibernateException ex) {
             transaction.rollback();
             System.err.println(ex);
